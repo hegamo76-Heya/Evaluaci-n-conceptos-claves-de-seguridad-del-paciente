@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛡️ ¿Cuánto conoces sobre Seguridad del Paciente? – Ebenezer</title>
+<style>
+  :root {
+    --azul: #1a3d7c;
+    --azul-claro: #2563cc;
+    --azul-suave: #dbeafe;
+    --azul-hover: #1e50a0;
+    --verde: #16a34a;
+    --verde-claro: #dcfce7;
+    --ambar: #d97706;
+    --ambar-claro: #fef3c7;
+    --naranja: #ea580c;
+    --naranja-claro: #ffedd5;
+    --rojo: #dc2626;
+    --rojo-claro: #fee2e2;
+    --gris: #f1f5f9;
+    --gris-borde: #e2e8f0;
+    --texto: #1e293b;
+    --texto-suave: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f4fd 50%, #f0fdf4 100%);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 20px 24px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .logo-eye {
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .logo-text { text-align: left; }
+  .logo-text .inst { font-size: 13px; font-weight: 600; opacity: 0.9; letter-spacing: 0.02em; }
+  .logo-text .sub-inst { font-size: 11px; opacity: 0.7; }
+  h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .subtitle {
+    font-size: clamp(13px, 2vw, 15px);
+    opacity: 0.9;
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  .slogan {
+    display: inline-flex;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .slogan span { opacity: 0.7; }
+
+  /* CONTENEDOR */
+  .container { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border: 1px solid var(--gris-borde);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--azul-suave);
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--gris-borde);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--azul);
+  }
+  .card-header .icon { font-size: 20px; }
+  .card-body { padding: 22px; }
+
+  /* PRIVACIDAD */
+  .privacy-box {
+    background: linear-gradient(to right, var(--azul-suave), #f0fdf4);
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--azul);
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+  .privacy-box strong { display: block; margin-bottom: 4px; }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--azul);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid var(--gris-borde);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .checkbox-label:hover { border-color: var(--azul-claro); background: var(--azul-suave); }
+  .checkbox-label input { width: 18px; height: 18px; accent-color: var(--azul-claro); cursor: pointer; }
+
+  /* FORMULARIO */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media(max-width:600px){ .form-grid { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 12px; font-weight: 600; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.04em; }
+  label .req { color: var(--rojo); }
+  input[type=text], select {
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--texto);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  input[type=text]:focus, select:focus {
+    outline: none;
+    border-color: var(--azul-claro);
+    box-shadow: 0 0 0 3px rgba(37,99,204,0.1);
+  }
+  .auto-field {
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--texto-suave);
+    background: var(--gris);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* BTN INICIAR */
+  .btn-start {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+  }
+  .btn-start:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,61,124,0.35); }
+  .btn-start:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SECCIÓN EVALUACIÓN */
+  .eval-section { display: none; }
+
+  /* INSTRUCCIONES */
+  .instrucciones {
+    background: linear-gradient(135deg, var(--azul-suave), #f0fdf4);
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--azul);
+  }
+  .instrucciones strong { display: block; font-size: 14px; margin-bottom: 6px; }
+
+  /* TIMER */
+  .timer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border: 1px solid var(--gris-borde);
+    border-radius: 10px;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-suave);
+  }
+  .timer-val { color: var(--azul); font-family: 'Courier New', monospace; font-size: 16px; }
+
+  /* TABLA DE RELACIÓN */
+  .relacion-table { width: 100%; border-collapse: collapse; }
+  .relacion-table th {
+    background: var(--azul);
+    color: white;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+  }
+  .relacion-table th:first-child { border-radius: 8px 0 0 0; }
+  .relacion-table th:last-child { border-radius: 0 8px 0 0; }
+  .relacion-table tbody tr {
+    border-bottom: 1px solid var(--gris-borde);
+    transition: background 0.15s;
+  }
+  .relacion-table tbody tr:hover { background: var(--azul-suave); }
+  .relacion-table tbody tr:last-child { border-bottom: none; }
+  .relacion-table td { padding: 12px 16px; vertical-align: middle; }
+  .concepto-label {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--azul);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .concepto-num {
+    width: 26px;
+    height: 26px;
+    background: var(--azul);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .select-ejemplo {
+    border: 1.5px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: var(--texto);
+    background: white;
+    cursor: pointer;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .select-ejemplo:focus {
+    outline: none;
+    border-color: var(--azul-claro);
+    box-shadow: 0 0 0 3px rgba(37,99,204,0.1);
+  }
+  .select-ejemplo.respondida { border-color: var(--verde); background: var(--verde-claro); }
+  .select-ejemplo.sin-respuesta { border-color: var(--rojo) !important; }
+
+  /* EJEMPLOS PANEL */
+  .ejemplos-panel {
+    background: var(--gris);
+    border: 1px solid var(--gris-borde);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 24px;
+  }
+  .ejemplos-panel h3 { font-size: 13px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+  .ejemplo-chip {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 4px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--texto);
+    transition: background 0.15s;
+  }
+  .ejemplo-chip .ej-letra {
+    width: 22px;
+    height: 22px;
+    background: var(--azul-suave);
+    color: var(--azul);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ejemplo-chip.usado { background: var(--verde-claro); border-color: #86efac; }
+
+  /* PROGRESO */
+  .progreso-bar {
+    height: 6px;
+    background: var(--gris-borde);
+    border-radius: 100px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progreso-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--azul), var(--verde));
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  /* BTN ENVIAR */
+  .btn-enviar {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--verde) 0%, #15803d 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .btn-enviar:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,163,74,0.4); }
+  .btn-enviar:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* RESULTADO */
+  .resultado-section { display: none; }
+  .resultado-hero {
+    text-align: center;
+    padding: 40px 20px 32px;
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+    color: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .resultado-hero::before {
+    content: '🛡️';
+    position: absolute;
+    font-size: 180px;
+    opacity: 0.05;
+    top: -20px;
+    right: -20px;
+  }
+  .resultado-hero h2 { font-size: 28px; margin-bottom: 6px; }
+  .resultado-hero .pct {
+    font-size: clamp(56px, 10vw, 80px);
+    font-weight: 900;
+    line-height: 1;
+    margin: 12px 0;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .resultado-hero .correctas { font-size: 16px; opacity: 0.9; margin-bottom: 12px; }
+  .resultado-hero .nivel-chip {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .retroalimentacion {
+    background: var(--gris);
+    border-left: 4px solid var(--azul-claro);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: var(--texto);
+    font-style: italic;
+  }
+
+  /* DETALLE RESPUESTAS */
+  .detalle-card {
+    border: 1px solid var(--gris-borde);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .detalle-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gris-borde);
+    font-size: 13px;
+  }
+  .detalle-row:last-child { border-bottom: none; }
+  .detalle-row.correcta { background: var(--verde-claro); }
+  .detalle-row.incorrecta { background: var(--rojo-claro); }
+  .detalle-icono { font-size: 16px; text-align: center; }
+  .detalle-texto strong { display: block; font-size: 12px; color: var(--texto-suave); margin-bottom: 2px; }
+  .detalle-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .badge-ok { background: var(--verde); color: white; }
+  .badge-no { background: var(--rojo); color: white; }
+
+  /* BTN REINTENTAR */
+  .btn-retry {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: white;
+    color: var(--azul);
+    border: 2.5px solid var(--azul-claro);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 12px;
+  }
+  .btn-retry:hover { background: var(--azul-suave); }
+
+  /* ENVIANDO */
+  .enviando-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,61,124,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .spinner {
+    width: 48px; height: 48px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ALERTA */
+  .alerta {
+    background: var(--rojo-claro);
+    border: 1px solid #fca5a5;
+    color: var(--rojo);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: none;
+  }
+
+  /* SLOGAN FINAL */
+  .slogan-final {
+    text-align: center;
+    padding: 20px;
+    background: var(--azul-suave);
+    border-radius: 10px;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--azul);
+    letter-spacing: 0.06em;
+  }
+  .frase-final {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 4px;
+    color: var(--texto-suave);
+  }
+
+  /* ESTADO ENVÍO */
+  .estado-envio { text-align: center; padding: 14px; font-size: 13px; border-radius: 8px; margin-top: 12px; display: none; }
+  .estado-ok { background: var(--verde-claro); color: var(--verde); border: 1px solid #86efac; }
+  .estado-err { background: var(--rojo-claro); color: var(--rojo); border: 1px solid #fca5a5; }
+
+  /* PANTALLA LÍMITE DE INTENTOS */
+  .limite-section { display: none; }
+  .limite-hero {
+    text-align: center;
+    padding: 48px 24px 36px;
+    background: linear-gradient(135deg, #1a3d7c 0%, #2563cc 100%);
+    color: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+  .limite-hero .limite-icon { font-size: 56px; margin-bottom: 12px; }
+  .limite-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+  .limite-hero p { font-size: 14px; opacity: 0.88; line-height: 1.6; max-width: 480px; margin: 0 auto; }
+  .intentos-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 18px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+  .intento-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .intento-dot.usado { background: white; border-color: white; }
+  .intento-dot.libre { background: transparent; }
+
+  /* CONTADOR DE INTENTOS (visible en sección datos) */
+  .badge-intentos {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .badge-intentos.queda-uno { background: var(--ambar-claro); color: var(--ambar); border: 1px solid #fde68a; }
+  .badge-intentos.primer-intento { background: var(--verde-claro); color: var(--verde); border: 1px solid #86efac; }
+
+  @media(max-width:600px){
+    .relacion-table thead { display: none; }
+    .relacion-table tbody tr { display: block; border: 1px solid var(--gris-borde); border-radius: 10px; margin-bottom: 10px; }
+    .relacion-table tbody tr:last-child { border-bottom: 1px solid var(--gris-borde); }
+    .relacion-table td { display: block; padding: 10px 14px; }
+    .select-ejemplo { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="enviando-overlay" id="overlay">
+  <div class="spinner"></div>
+  <div>Enviando evaluación…</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-eye">👁️</div>
+      <div class="logo-text">
+        <div class="inst">Centro Oftalmológico Ebenezer S.A.S.</div>
+        <div class="sub-inst">Seguridad del Paciente</div>
+      </div>
+    </div>
+    <h1>🛡️ ¿Cuánto conoces sobre<br>Seguridad del Paciente?</h1>
+    <p class="subtitle">"Relaciona cada concepto con la situación que mejor lo representa."</p>
+    <div class="slogan">
+      REPORTA <span>•</span> ANALIZA <span>•</span> APRENDE <span>•</span> MEJORA
+    </div>
+  </div>
+</div>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="container">
+
+  <!-- ===== SECCIÓN 1: DATOS Y PRIVACIDAD ===== -->
+  <div id="seccion-datos">
+
+    <!-- PRIVACIDAD -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">🔒</span>
+        <h2>Uso de la información</h2>
+      </div>
+      <div class="card-body">
+        <div class="privacy-box">
+          <strong>Aviso de privacidad</strong>
+          La información registrada será utilizada exclusivamente para fines de capacitación, evaluación del aprendizaje y fortalecimiento de la Seguridad del Paciente en Centro Oftalmológico Ebenezer S.A.S. No se solicitará información de pacientes, historias clínicas ni datos clínicos. Los resultados individuales son confidenciales y solo el equipo de Calidad tendrá acceso al consolidado.
+        </div>
+        <label class="checkbox-label" for="acepto">
+          <input type="checkbox" id="acepto" onchange="validarAcepto()">
+          Acepto participar en la evaluación y el uso de la información para fines educativos.
+        </label>
+      </div>
+    </div>
+
+    <!-- DATOS DEL PARTICIPANTE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">👤</span>
+        <h2>Datos del participante</h2>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="nombre">Nombre completo <span class="req">*</span></label>
+            <input type="text" id="nombre" placeholder="Escribe tu nombre completo" maxlength="120" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="area">Área / Servicio <span class="req">*</span></label>
+            <select id="area">
+              <option value="">— Selecciona —</option>
+              <option>Consulta Externa</option>
+              <option>Cirugía</option>
+              <option>Farmacia</option>
+              <option>Ayudas Diagnósticas</option>
+              <option>Optometría</option>
+              <option>Admisiones</option>
+              <option>SIAU</option>
+              <option>TIC</option>
+              <option>Logística</option>
+              <option>Servicios Generales</option>
+              <option>Mantenimiento</option>
+              <option>Calidad</option>
+              <option>Investigación</option>
+              <option>Dirección Médica</option>
+              <option>Gerencia</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cargo">Cargo <span class="req">*</span></label>
+            <input type="text" id="cargo" placeholder="Ej: Auxiliar de enfermería" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="sede">Sede <span class="req">*</span></label>
+            <select id="sede">
+              <option value="">— Selecciona —</option>
+              <option>Sede 1</option>
+              <option>Sede 2</option>
+              <option>Administrativo</option>
+              <option>Ambas sedes</option>
+              <option>No aplica</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fecha (automática)</label>
+            <div class="auto-field" id="campo-fecha">—</div>
+          </div>
+          <div class="form-group">
+            <label>Hora (automática)</label>
+            <div class="auto-field" id="campo-hora">—</div>
+          </div>
+        </div>
+        <div class="alerta" id="alerta-datos">⚠️ Por favor completa todos los campos obligatorios y acepta la participación antes de continuar.</div>
+        <button class="btn-start" id="btn-iniciar" onclick="iniciarEvaluacion()">🚀 Iniciar evaluación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 2: EVALUACIÓN ===== -->
+  <div class="eval-section" id="seccion-eval">
+    <div class="instrucciones">
+      <strong>🧠 Instrucciones</strong>
+      En la tabla de abajo encontrarás los 10 conceptos clave de Seguridad del Paciente. Para cada uno, selecciona en el menú desplegable el ejemplo (situación) que mejor lo representa. Cada ejemplo corresponde a un único concepto. El orden de los ejemplos se presenta de forma aleatoria en cada sesión.
+    </div>
+
+    <div class="timer-bar">
+      <span>⏱️ Tiempo transcurrido:</span>
+      <span class="timer-val" id="timer">00:00</span>
+      <span id="progreso-txt" style="font-size:12px">0 / 10 respondidas</span>
+    </div>
+
+    <div class="progreso-bar"><div class="progreso-fill" id="progreso-fill" style="width:0%"></div></div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">🧩</span>
+        <h2>Relaciona cada concepto con su ejemplo</h2>
+      </div>
+      <div class="card-body" style="padding:0 0 4px">
+        <div style="overflow-x:auto">
+          <table class="relacion-table">
+            <thead>
+              <tr>
+                <th style="width:42%">Concepto</th>
+                <th>Selecciona el ejemplo que corresponde</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-cuerpo"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL EJEMPLOS -->
+    <div class="ejemplos-panel">
+      <h3>📋 Lista de situaciones / ejemplos</h3>
+      <div id="chips-ejemplos"></div>
+    </div>
+
+    <div class="alerta" id="alerta-eval">⚠️ Debes relacionar todos los conceptos antes de enviar la evaluación.</div>
+    <button class="btn-enviar" id="btn-enviar" onclick="enviarEvaluacion()">✅ Enviar evaluación</button>
+  </div>
+
+  <!-- ===== SECCIÓN 3: RESULTADO ===== -->
+  <div class="resultado-section" id="seccion-resultado">
+    <div class="resultado-hero" id="resultado-hero">
+      <h2>🎉 ¡Evaluación terminada!</h2>
+      <div class="pct" id="res-pct">—</div>
+      <div class="correctas" id="res-correctas">Respuestas correctas: — / 10</div>
+      <div class="nivel-chip" id="res-nivel">—</div>
+    </div>
+
+    <div class="retroalimentacion" id="res-retro"></div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📊</span>
+        <h2>Detalle de tus respuestas</h2>
+      </div>
+      <div class="card-body" style="padding:8px">
+        <div id="detalle-respuestas"></div>
+      </div>
+    </div>
+
+    <div class="estado-envio" id="estado-envio"></div>
+
+    <div class="slogan-final">
+      REPORTA • ANALIZA • APRENDE • MEJORA
+      <span class="frase-final">"La seguridad del paciente también se ve en cada detalle."</span>
+    </div>
+
+    <div id="btn-retry-wrap">
+      <button class="btn-retry" id="btn-retry" onclick="reintentar()">🔄 Realizar nuevamente</button>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 4: LÍMITE DE INTENTOS ===== -->
+  <div class="limite-section" id="seccion-limite">
+    <div class="limite-hero">
+      <div class="limite-icon">🔒</div>
+      <h2>Has completado tus dos intentos</h2>
+      <p>Ya realizaste la evaluación el máximo de veces permitido (2 intentos). Tus resultados quedaron registrados y serán revisados por el equipo de Calidad.</p>
+      <div class="intentos-indicator">
+        <span>Intentos:</span>
+        <div class="intento-dot usado"></div>
+        <div class="intento-dot usado"></div>
+        <span>2 / 2 completados</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body" style="text-align:center; padding: 28px 24px;">
+        <div style="font-size:32px; margin-bottom:12px">💙</div>
+        <div style="font-size:15px; font-weight:600; color:var(--azul); margin-bottom:8px">¡Gracias por tu participación!</div>
+        <div style="font-size:13px; color:var(--texto-suave); line-height:1.7; max-width:420px; margin:0 auto;">
+          Tu participación también hace parte de la Seguridad del Paciente en Ebenezer.<br>
+          Si tienes preguntas sobre tus resultados, comunícate con el equipo de Calidad.
+        </div>
+      </div>
+    </div>
+    <div class="slogan-final">
+      REPORTA • ANALIZA • APRENDE • MEJORA
+      <span class="frase-final">"La seguridad del paciente también se ve en cada detalle."</span>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ============================================================
+// CONFIGURACIÓN – URL del Google Apps Script Web App
+// ============================================================
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxt0WfKZIsQUPaDRfzhcS3rGOAyx_tn-XNj4IQA30dd2ElHLxgqgLUdzEIbh8y3bntb/exec';
+
+// ============================================================
+// CONTROL DE INTENTOS (máx. 2 por dispositivo/sesión)
+// Usa localStorage para persistir entre recargas de página.
+// La clave incluye la fecha para que el límite sea diario.
+// ============================================================
+const MAX_INTENTOS = 2;
+const STORAGE_KEY  = 'ebenezer_sp_intentos_' + new Date().toISOString().slice(0,10);
+
+function getIntentos() {
+  try { return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10); }
+  catch(e) { return 0; }
+}
+function incrementarIntentos() {
+  try { localStorage.setItem(STORAGE_KEY, String(getIntentos() + 1)); }
+  catch(e) {}
+}
+function quedanIntentos() {
+  return getIntentos() < MAX_INTENTOS;
+}
+
+// ============================================================
+// BANCO DE CONCEPTOS Y EJEMPLOS (alineados con imagen institucional)
+// ============================================================
+const BANCO = [
+  {
+    concepto: 'FALLA LATENTE',
+    correcto: 'A',
+    ejemplo: 'A',
+    texto: 'El proceso de verificación de las características del lente intraocular antes de su implantación no está claramente definido en el protocolo institucional. Nadie la ve, pero la condición existe detrás del proceso.'
+  },
+  {
+    concepto: 'FALLA ACTIVA',
+    correcto: 'B',
+    ejemplo: 'B',
+    texto: 'Durante la preparación preoperatoria, un colaborador registra información incorrecta en la historia clínica porque actúa rápido sin verificar. El error ocurre directamente durante la atención.'
+  },
+  {
+    concepto: 'ACCIÓN INSEGURA',
+    correcto: 'C',
+    ejemplo: 'C',
+    texto: 'Un colaborador omite la verificación de la lateralidad del ojo antes de la cirugía porque considera que "ya conoce al paciente" y que no hace falta revisar.'
+  },
+  {
+    concepto: 'INCIDENTE',
+    correcto: 'D',
+    ejemplo: 'D',
+    texto: 'Se prepara un lente intraocular que no corresponde al seleccionado para el paciente, pero otro integrante del equipo lo detecta antes de la implantación y la situación se corrige a tiempo. No hubo daño.'
+  },
+  {
+    concepto: 'EVENTO ADVERSO',
+    correcto: 'E',
+    ejemplo: 'E',
+    texto: 'Tras una cirugía de catarata, el paciente presenta una complicación relacionada con la atención recibida. Si alguien hubiera revisado el proceso completo, la situación podría haberse evitado y el daño no habría ocurrido.'
+  },
+  {
+    concepto: 'COMPLICACIÓN QUIRÚRGICA',
+    correcto: 'F',
+    ejemplo: 'F',
+    texto: 'Durante una cirugía de catarata realizada correctamente y siguiendo todas las indicaciones establecidas, se presenta una ruptura capsular inherente al perfil clínico del paciente. El procedimiento fue adecuado.'
+  },
+  {
+    concepto: 'SERVICIO NO CONFORME',
+    correcto: 'G',
+    ejemplo: 'G',
+    texto: 'El tiempo de espera de los pacientes en consulta externa supera los 60 minutos establecidos institucionalmente debido a una falla en la organización del servicio y la programación de citas.'
+  },
+  {
+    concepto: 'PRODUCTO NO CONFORME',
+    correcto: 'H',
+    ejemplo: 'H',
+    texto: 'Farmacia recibe un dispositivo médico cuyo empaque se encuentra deteriorado y con fecha de vencimiento vencida. No cumple las condiciones requeridas para su utilización. Se aísla y se cambia.'
+  },
+  {
+    concepto: 'IAAS',
+    correcto: 'I',
+    ejemplo: 'I',
+    texto: 'Un paciente operado de catarata desarrolla endoftalmitis durante el postoperatorio. La infección no estaba presente al momento del ingreso y está relacionada con la atención en salud recibida.'
+  },
+  {
+    concepto: 'PREVENIBLE / NO PREVENIBLE',
+    correcto: 'J',
+    ejemplo: 'J',
+    texto: 'Se presentó un daño al paciente. Al analizarlo, se encontró que existían medidas institucionales conocidas para evitarlo, pero estas no fueron cumplidas. Por tanto, el evento era prevenible.'
+  }
+];
+
+// ============================================================
+// ESTADO GLOBAL
+// ============================================================
+let ordenEjemplos = [];   // Letras mezcladas aleatoriamente
+let timerInterval = null;
+let segundos = 0;
+let horaInicio = null;
+let datosPart = {};
+
+// ============================================================
+// RELOJ AUTOMÁTICO
+// ============================================================
+function actualizarReloj(){
+  const ahora = new Date();
+  document.getElementById('campo-fecha').textContent =
+    ahora.toLocaleDateString('es-CO', {day:'2-digit', month:'2-digit', year:'numeric'});
+  document.getElementById('campo-hora').textContent =
+    ahora.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+}
+actualizarReloj();
+setInterval(actualizarReloj, 1000);
+
+// ============================================================
+// INIT – Verificar límite al cargar la página
+// ============================================================
+(function init(){
+  const intentos = getIntentos();
+  if(intentos >= MAX_INTENTOS){
+    // Ya agotó los dos intentos: mostrar pantalla de cierre directamente
+    document.getElementById('seccion-datos').style.display = 'none';
+    document.getElementById('seccion-limite').style.display = 'block';
+    return;
+  }
+  // Mostrar badge informativo sobre intentos restantes
+  const restantes = MAX_INTENTOS - intentos;
+  const badgeWrap = document.createElement('div');
+  if(intentos === 0){
+    badgeWrap.innerHTML = `<div class="badge-intentos primer-intento">✅ Tienes ${restantes} intento${restantes>1?'s':''} disponible${restantes>1?'s':''} hoy</div>`;
+  } else {
+    badgeWrap.innerHTML = `<div class="badge-intentos queda-uno">⚠️ Te queda ${restantes} intento disponible — este será tu último intento de hoy</div>`;
+  }
+  const cardBody = document.querySelector('#seccion-datos .card-body');
+  if(cardBody) cardBody.insertBefore(badgeWrap, cardBody.firstChild);
+})();
+
+// ============================================================
+// VALIDAR ACEPTO
+// ============================================================
+function validarAcepto(){
+  // Solo habilita el botón cuando se marca acepto (campos se validan al click)
+}
+
+// ============================================================
+// INICIAR EVALUACIÓN
+// ============================================================
+function iniciarEvaluacion(){
+  // Doble verificación de intentos (por si el usuario manipuló el DOM)
+  if(!quedanIntentos()){
+    document.getElementById('seccion-datos').style.display = 'none';
+    document.getElementById('seccion-limite').style.display = 'block';
+    window.scrollTo(0,0);
+    return;
+  }
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const area   = document.getElementById('area').value;
+  const cargo  = document.getElementById('cargo').value.trim();
+  const sede   = document.getElementById('sede').value;
+  const acepto = document.getElementById('acepto').checked;
+  const alerta = document.getElementById('alerta-datos');
+
+  if(!nombre || !area || !cargo || !sede || !acepto){
+    alerta.style.display = 'block';
+    return;
+  }
+  alerta.style.display = 'none';
+
+  datosPart = {
+    nombre,
+    area,
+    cargo,
+    sede,
+    fecha: document.getElementById('campo-fecha').textContent,
+    hora:  document.getElementById('campo-hora').textContent
+  };
+  horaInicio = new Date();
+
+  // Mezclar aleatoriamente las letras de los ejemplos
+  ordenEjemplos = ['A','B','C','D','E','F','G','H','I','J'];
+  for(let i = ordenEjemplos.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [ordenEjemplos[i], ordenEjemplos[j]] = [ordenEjemplos[j], ordenEjemplos[i]];
+  }
+
+  construirTabla();
+  construirChips();
+
+  document.getElementById('seccion-datos').style.display = 'none';
+  document.getElementById('seccion-eval').style.display = 'block';
+  window.scrollTo(0,0);
+  iniciarTimer();
+}
+
+// ============================================================
+// CONSTRUIR TABLA DE RELACIÓN
+// ============================================================
+function construirTabla(){
+  const tbody = document.getElementById('tabla-cuerpo');
+  tbody.innerHTML = '';
+  BANCO.forEach((item, idx) => {
+    const tr = document.createElement('tr');
+    // Columna concepto
+    const tdC = document.createElement('td');
+    tdC.innerHTML = `<div class="concepto-label"><div class="concepto-num">${idx+1}</div>${item.concepto}</div>`;
+    // Columna select
+    const tdS = document.createElement('td');
+    const select = document.createElement('select');
+    select.className = 'select-ejemplo';
+    select.id = `sel-${idx}`;
+    select.dataset.correcto = item.correcto;
+    select.innerHTML = '<option value="">— Selecciona un ejemplo —</option>';
+    ordenEjemplos.forEach(letra => {
+      const bk = BANCO.find(b => b.ejemplo === letra);
+      const opt = document.createElement('option');
+      opt.value = letra;
+      opt.textContent = `Ejemplo ${letra}: ${bk.texto.substring(0, 65)}…`;
+      select.appendChild(opt);
+    });
+    select.addEventListener('change', onSelectChange);
+    tdS.appendChild(select);
+    tr.appendChild(tdC);
+    tr.appendChild(tdS);
+    tbody.appendChild(tr);
+  });
+}
+
+// ============================================================
+// CONSTRUIR CHIPS DE EJEMPLOS
+// ============================================================
+function construirChips(){
+  const cont = document.getElementById('chips-ejemplos');
+  cont.innerHTML = '';
+  ordenEjemplos.forEach(letra => {
+    const bk = BANCO.find(b => b.ejemplo === letra);
+    const chip = document.createElement('div');
+    chip.className = 'ejemplo-chip';
+    chip.id = `chip-${letra}`;
+    chip.innerHTML = `<div class="ej-letra">${letra}</div><div>${bk.texto}</div>`;
+    cont.appendChild(chip);
+  });
+}
+
+// ============================================================
+// ON SELECT CHANGE – Validar unicidad
+// ============================================================
+function onSelectChange(e){
+  const sel = e.target;
+  const val = sel.value;
+
+  // Detectar si ya fue seleccionado en otro select
+  if(val){
+    const todos = document.querySelectorAll('.select-ejemplo');
+    todos.forEach(other => {
+      if(other !== sel && other.value === val){
+        alert(`⚠️ El Ejemplo ${val} ya fue seleccionado para otro concepto. Por favor elige una opción diferente.`);
+        sel.value = '';
+      }
+    });
+  }
+
+  actualizarProgreso();
+  actualizarChips();
+}
+
+// ============================================================
+// ACTUALIZAR PROGRESO Y CHIPS
+// ============================================================
+function actualizarProgreso(){
+  const todos = document.querySelectorAll('.select-ejemplo');
+  let respondidas = 0;
+  todos.forEach(s => {
+    if(s.value) {
+      respondidas++;
+      s.classList.add('respondida');
+    } else {
+      s.classList.remove('respondida');
+    }
+  });
+  const pct = Math.round((respondidas / 10) * 100);
+  document.getElementById('progreso-fill').style.width = pct + '%';
+  document.getElementById('progreso-txt').textContent = `${respondidas} / 10 respondidas`;
+}
+
+function actualizarChips(){
+  const usados = new Set();
+  document.querySelectorAll('.select-ejemplo').forEach(s => { if(s.value) usados.add(s.value); });
+  document.querySelectorAll('.ejemplo-chip').forEach(chip => {
+    const letra = chip.id.replace('chip-', '');
+    chip.classList.toggle('usado', usados.has(letra));
+  });
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function iniciarTimer(){
+  segundos = 0;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    segundos++;
+    const m = String(Math.floor(segundos / 60)).padStart(2, '0');
+    const s = String(segundos % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `${m}:${s}`;
+  }, 1000);
+}
+
+// ============================================================
+// ENVIAR EVALUACIÓN
+// ============================================================
+function enviarEvaluacion(){
+  const todos = document.querySelectorAll('.select-ejemplo');
+  let todoRespondido = true;
+
+  todos.forEach(s => {
+    if(!s.value){
+      todoRespondido = false;
+      s.classList.add('sin-respuesta');
+    } else {
+      s.classList.remove('sin-respuesta');
+    }
+  });
+
+  const alerta = document.getElementById('alerta-eval');
+  if(!todoRespondido){
+    alerta.style.display = 'block';
+    return;
+  }
+  alerta.style.display = 'none';
+  clearInterval(timerInterval);
+
+  // Calificar
+  let correctas = 0;
+  const respuestas = [];
+  todos.forEach((s, idx) => {
+    const esCorrecta = s.value === s.dataset.correcto;
+    if(esCorrecta) correctas++;
+    respuestas.push({ concepto: BANCO[idx].concepto, seleccion: s.value, correcto: s.dataset.correcto, ok: esCorrecta });
+  });
+
+  const porcentaje = correctas * 10;
+
+  // Mostrar resultado
+  mostrarResultado(correctas, porcentaje, respuestas);
+
+  // Enviar a Google Sheets
+  enviarASheets(correctas, porcentaje, respuestas);
+}
+
+// ============================================================
+// MOSTRAR RESULTADO
+// ============================================================
+function mostrarResultado(correctas, porcentaje, respuestas){
+  document.getElementById('seccion-eval').style.display = 'none';
+  document.getElementById('seccion-resultado').style.display = 'block';
+  window.scrollTo(0, 0);
+
+  // Mostrar u ocultar el botón de reintentar según intentos restantes
+  const retryWrap = document.getElementById('btn-retry-wrap');
+  if(retryWrap){
+    if(!quedanIntentos()){
+      retryWrap.innerHTML = `<div class="slogan-final" style="margin-top:12px;color:var(--rojo);background:var(--rojo-claro);border:1px solid #fca5a5">🔒 Has completado tus 2 intentos permitidos. No es posible realizar la evaluación nuevamente hoy.</div>`;
+    }
+  }
+
+  document.getElementById('res-pct').textContent = porcentaje + '%';
+  document.getElementById('res-correctas').textContent = `Respuestas correctas: ${correctas} / 10`;
+
+  let nivel, retro, heroColor;
+  if(porcentaje >= 90){
+    nivel = '🟢 Comprensión alta de los conceptos';
+    retro = '¡Muy bien! Reconoces adecuadamente los conceptos clave de Seguridad del Paciente. Identificar los riesgos a tiempo permite fortalecer las barreras antes de que ocurra un daño. ¡Sigue siendo parte activa de la seguridad en Ebenezer!';
+    heroColor = 'linear-gradient(135deg, #15803d 0%, #16a34a 100%)';
+  } else if(porcentaje >= 80){
+    nivel = '🟡 Comprensión adecuada con oportunidades de refuerzo';
+    retro = '¡Buen trabajo! Reconoces la mayoría de los conceptos clave. Algunos conceptos pueden requerir un repaso adicional. Recuerda: reconocer las fallas del sistema antes de que causen daño es una responsabilidad compartida.';
+    heroColor = 'linear-gradient(135deg, #b45309 0%, #d97706 100%)';
+  } else if(porcentaje >= 70){
+    nivel = '🟠 Requiere refuerzo de conceptos';
+    retro = 'Esta actividad es una oportunidad para identificar áreas de fortalecimiento. Te invitamos a revisar los conceptos clave de Seguridad del Paciente. Reportar, analizar y aprender nos ayuda a fortalecer la atención segura en Ebenezer.';
+    heroColor = 'linear-gradient(135deg, #c2410c 0%, #ea580c 100%)';
+  } else {
+    nivel = '🔴 Requiere fortalecimiento en Seguridad del Paciente';
+    retro = 'Esta evaluación es una oportunidad de aprendizaje. Te invitamos a revisar los conceptos clave y participar en las actividades de capacitación del Programa Ebenezer Atención Segura. Cada concepto que comprendes contribuye a la seguridad de nuestros pacientes.';
+    heroColor = 'linear-gradient(135deg, #991b1b 0%, #dc2626 100%)';
+  }
+
+  document.getElementById('resultado-hero').style.background = heroColor;
+  document.getElementById('res-nivel').textContent = nivel;
+  document.getElementById('res-retro').textContent = retro;
+
+  // Detalle
+  const cont = document.getElementById('detalle-respuestas');
+  cont.innerHTML = '';
+  respuestas.forEach((r, idx) => {
+    const div = document.createElement('div');
+    div.className = 'detalle-card';
+    const ejemploSel = BANCO.find(b => b.ejemplo === r.seleccion);
+    const ejemploCorr = BANCO.find(b => b.ejemplo === r.correcto);
+    let html = `<div class="detalle-row ${r.ok ? 'correcta' : 'incorrecta'}">
+      <div class="detalle-icono">${r.ok ? '✅' : '❌'}</div>
+      <div class="detalle-texto">
+        <strong>${idx+1}. ${r.concepto}</strong>
+        <div>${r.ok ? `Ejemplo ${r.seleccion}: ${ejemploSel?.texto?.substring(0,80)}…` : `Tu respuesta: Ejemplo ${r.seleccion} – Correcto: Ejemplo ${r.correcto}`}</div>
+        ${!r.ok ? `<div style="font-size:11px;color:#6b7280;margin-top:4px;font-style:italic">Ejemplo correcto: ${ejemploCorr?.texto?.substring(0,90)}…</div>` : ''}
+      </div>
+      <div><span class="detalle-badge ${r.ok ? 'badge-ok' : 'badge-no'}">${r.ok ? '+10 pts' : '0 pts'}</span></div>
+    </div>`;
+    div.innerHTML = html;
+    cont.appendChild(div);
+  });
+}
+
+// ============================================================
+// ENVIAR A GOOGLE SHEETS
+// ============================================================
+function enviarASheets(correctas, porcentaje, respuestas){
+  // Registrar el intento al momento del envío
+  incrementarIntentos();
+
+  const tiempoMin = Math.floor(segundos / 60);
+  const tiempoSeg = segundos % 60;
+  const tiempoStr = `${tiempoMin}m ${tiempoSeg}s`;
+
+  let nivelStr;
+  if(porcentaje >= 90) nivelStr = 'Comprensión alta';
+  else if(porcentaje >= 80) nivelStr = 'Comprensión adecuada';
+  else if(porcentaje >= 70) nivelStr = 'Requiere refuerzo';
+  else nivelStr = 'Requiere fortalecimiento';
+
+  const payload = {
+    nombre:    datosPart.nombre,
+    cargo:     datosPart.cargo,
+    area:      datosPart.area,
+    sede:      datosPart.sede,
+    fecha:     datosPart.fecha,
+    hora:      datosPart.hora,
+    intento:   getIntentos(),   // 1 o 2
+    correctas: correctas,
+    incorrectas: 10 - correctas,
+    porcentaje:  porcentaje,
+    resultado:   nivelStr,
+    tiempo:      tiempoStr,
+    respuestas:  respuestas.map((r,i) => ({
+      pregunta:   `P${i+1}_${r.concepto}`,
+      seleccion:  r.seleccion,
+      correcto:   r.correcto,
+      ok:         r.ok
+    }))
+  };
+
+  if(SCRIPT_URL === 'PEGAR_AQUI_LA_URL_DEL_APPS_SCRIPT'){
+    // Modo demo: no enviar
+    const el = document.getElementById('estado-envio');
+    el.style.display = 'block';
+    el.className = 'estado-envio estado-ok';
+    el.textContent = '✅ Modo demo: resultado calculado correctamente. Configura la URL del Apps Script para activar el registro en Google Sheets.';
+    return;
+  }
+
+  document.getElementById('overlay').style.display = 'flex';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('overlay').style.display = 'none';
+    const el = document.getElementById('estado-envio');
+    el.style.display = 'block';
+    if(data.status === 'ok'){
+      el.className = 'estado-envio estado-ok';
+      el.textContent = `✅ Tu evaluación quedó registrada exitosamente. ID: ${data.id}`;
+    } else {
+      el.className = 'estado-envio estado-err';
+      el.textContent = '⚠️ Tu resultado fue calculado, pero hubo un problema al guardar. Comunícalo al equipo de Calidad.';
+    }
+  })
+  .catch(() => {
+    document.getElementById('overlay').style.display = 'none';
+    const el = document.getElementById('estado-envio');
+    el.style.display = 'block';
+    el.className = 'estado-envio estado-err';
+    el.textContent = '⚠️ Tu resultado fue calculado, pero no pudo enviarse al servidor. Comunícalo al equipo de Calidad.';
+  });
+}
+
+// ============================================================
+// REINTENTAR – Solo permitido si quedan intentos
+// ============================================================
+function reintentar(){
+  document.getElementById('seccion-resultado').style.display = 'none';
+
+  if(!quedanIntentos()){
+    // Agotó los dos intentos → mostrar pantalla de cierre
+    document.getElementById('seccion-limite').style.display = 'block';
+    window.scrollTo(0, 0);
+    return;
+  }
+
+  // Queda un intento: volver al formulario con advertencia
+  document.getElementById('seccion-datos').style.display = 'block';
+
+  // Actualizar badge de intentos (reemplazar el existente)
+  const badgeExistente = document.querySelector('.badge-intentos');
+  if(badgeExistente){
+    badgeExistente.outerHTML = `<div class="badge-intentos queda-uno">⚠️ Este es tu último intento disponible hoy</div>`;
+  }
+
+  document.getElementById('nombre').value = '';
+  document.getElementById('area').value = '';
+  document.getElementById('cargo').value = '';
+  document.getElementById('sede').value = '';
+  document.getElementById('acepto').checked = false;
+  document.getElementById('alerta-datos').style.display = 'none';
+  document.getElementById('estado-envio').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
